@@ -789,6 +789,8 @@ class Painter:
 
 def get_keysym(key: str) -> int:
     keysym = keysyms.get(key)
+    if not keysym and key[0:2] == '0x':
+        keysym = int(key,16)
     if not keysym:
         raise XCBQError("Unknown key: %s" % key)
     return keysym
